@@ -1,105 +1,61 @@
+//Create three buttons, one for each selection. Add an event listener to the buttons that call your playRound 
+//function with the correct playerSelection every time a button is clicked. (you can keep the console.logs for this step)
 
-const tools = ["ROCK", "PAPER", "SCISSOR"];
-const playerWin = "Congratz! You Win!";
-const playerLose ="You lose!";
-const draw = "It's TIE! Play again!";
+const buttons = document.querySelector("#buttons");
+
+const tools = ["rock", "paper", "scissor"];
+
+const rock = document.querySelector("#btn-rock");
+const paper = document.querySelector("#btn-paper");
+const scissor = document.querySelector("#btn-scissor");
 
 
+let playerResult = null;
+console.log(playerResult);
 let userScore = 1;
-let npcScore = 1;
-let drawScore = 1;
+let aiScore = 1;
+let draw = 1;
 
 
+rock.addEventListener("click", function onclick(){
+    playerResult = tools[0], console.log("Player: ", playerResult);
+});
+paper.addEventListener("click", function onclick(){
+    return playerResult = tools[1], console.log("Player: ", playerResult);
+});
+scissor.addEventListener("click", function onclick(){
+    return playerResult = tools[2], console.log("Player: ", playerResult);
+});
 
-//NPC random rolls for rock, paper and scissors
-function computerPlay(npcTool){
-    npcTool = tools[Math.floor(Math.random()*tools.length)];
-    return npcTool;
-}
+//NPC random select
+function computerPlay(){
+    const npcTool = tools[Math.floor(Math.random()*tools.length)];
+    return console.log("Ai: ", npcTool), npcTool;
+};
 
-//NPC random variable from computerPlay() selected
-function computerSelect(){
-    document.getElementById("computerSelection").innerHTML = computerPlay();
-}
 
-//Player select: rock, paper, scissors. case-insensitive!!!! 
-function playerSelect(){
-    const select =  document.getElementById("userInput").value;
-    const capSelect = select.toString().toUpperCase();
+// start the game for 1 round
+function playRound(){
+    let aiResult = computerPlay();
+    const match = `${playerResult} vs ${aiResult}`;
 
-        if(capSelect != tools[0] && capSelect != tools[1] && capSelect != tools[2]) {
-                const badTool = "Wrong tool! You can only chosoe from: rock, paper or scissors!";
-                return document.getElementById("badTool").innerHTML = badTool;
-        }else{
-            switch(capSelect){
-                case "ROCK":
-                    document.getElementById("playerSelection").innerHTML = capSelect, document.getElementById("badTool").innerHTML = "";
-                    break;
-                case "PAPER":
-                    document.getElementById("playerSelection").innerHTML = capSelect, document.getElementById("badTool").innerHTML = "";
-                    break;
-                case "SCISSOR": 
-                    document.getElementById("playerSelection").innerHTML = capSelect, document.getElementById("badTool").innerHTML = "";
-                    break;
-    }
-    return capSelect;
-}
-}
-
-// 1 round of play
-function playRound(){   
-    const playerSelection = playerSelect();
-    const computerSelection = computerPlay();
-    const gameWinner = game();
-    
-
-    if(userScore === 5){
-        document.getElementById("gameWinner").innerHTML = playerWin, reset();
-    }else if(npcScore === 5) {
-        document.getElementById("gameWinner").innerHTML = playerLose , reset();
-    }
-
-    if(playerSelection === computerSelection){
-        return document.getElementById("winner").innerHTML = draw, document.getElementById("computerSelection").innerHTML = computerSelection,
-         document.getElementById("draw").innerHTML = drawScore++;
+    if(playerResult === aiResult){
+        return console.log(`${match} is a draw!`)
     }else{
-        if(playerSelection == tools[0] && computerSelection != tools[1]){
-            return document.getElementById("winner").innerHTML = playerWin, document.getElementById("computerSelection").innerHTML = computerSelection,
-             document.getElementById("userScore").innerHTML = userScore++, gameWinner;
-
-        }else if(playerSelection == tools[1] && computerSelection != tools[2]){
-            return document.getElementById("winner").innerHTML = playerWin, document.getElementById("computerSelection").innerHTML = computerSelection,
-             document.getElementById("userScore").innerHTML = userScore++, gameWinner;
-
-        }else if(playerSelection == tools[2] && computerSelection != tools[0]){
-            return document.getElementById("winner").innerHTML = playerWin, document.getElementById("computerSelection").innerHTML = computerSelection,
-             document.getElementById("userScore").innerHTML = userScore++, gameWinner;
-
+        if(playerResult === tools[0] && aiResult != tools[1]){
+            return console.log(`${match}: You win, ${playerResult} beat the ${aiResult}`)
+        }else if(playerResult === tools[1] && aiResult != tools[2]) {
+            return console.log(`${match}: You win, ${playerResult} beat the ${aiResult}`)
+        }else if(playerResult === tools[2] && aiResult != tools[0]){
+            return console.log(`${match}: You win, ${playerResult} beat the ${aiResult}`)
         }else{
-            return document.getElementById("winner").innerHTML = playerLose, document.getElementById("computerSelection").innerHTML = computerSelection,
-             document.getElementById("npcScore").innerHTML = npcScore++, gameWinner;
+            return console.log(`${match}: Ai win, ${aiResult} beat the ${playerResult}`)
         }
     }
-}
-
-//write a div for player choosed tool
-function playerChoose(){
-    document.getElementById("playerSelection").innerHTML = playerSelect();
-}
-function game() {
-    switch(userScore, npcScore){
-        case "Player wins!" :
-            document.getElementById("gameWinner").innerHTML = userScore;
-            break;
-        case "NPC win!":
-            document.getElementById("gameWinner").innerHTML = npcScore;
-            break;
-    }
-    }
-
-    function reset(){
-        return document.location.reload(true);
-    }
-    
 
     
+};
+
+
+
+ 
