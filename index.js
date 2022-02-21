@@ -1,98 +1,74 @@
-//Create three buttons, one for each selection. Add an event listener to the buttons that call your playRound 
-//function with the correct playerSelection every time a button is clicked. (you can keep the console.logs for this step)
+const buttons = document.querySelectorAll("input");
 
-const tools = ["rock", "paper", "scissor"];
+let playerScore = 1;
+let computerScore = 1;
+let drawScore = 1;
 
-const button = document.querySelector("button");
-const rock = document.querySelector("#btn-rock");
-const paper = document.querySelector("#btn-paper");
-const scissor = document.querySelector("#btn-scissor");
 
-const playerScore = document.querySelector("userScore");
-const computerScore = document.querySelector("aiScore");
-const drawScore = document.querySelector("draw");
-
-let userScore = 1;
-let aiScore = 1;
-let draw = 1;
-
-function playerSelect(){
-    button.addEventListener("click", () =>{
-        if(button.id == "btn-rock"){
-            return tools[0];
-        }else if(button.id == "btn-paper"){
-            return tools[1];
-        }else if(button.id == "btn-scissor"){
-            return tools[2];
-        }
-    });
-    return  event.target.value;
-    };
-
-//NPC random select
+// computer random select
 function computerPlay(){
-    const npcTool = tools[Math.floor(Math.random()*tools.length)];
-    return console.log("Ai: ", npcTool), npcTool;
-};
-
-
-// start the game for 1 round
-function playRound(){
-    const aiResult = computerPlay();
-    const playerResult = playerSelect();
-    const match = `${playerResult} vs ${aiResult}`;
+    const tools = ["rock", "paper", "scissor"];
+    return tools[Math.floor(Math.random()*tools.length)];
     
-    if(playerResult === aiResult){
-       return drawScoreBoard(), console.log(`${match} is a draw!`, draw)
+}
+// play
+function playRound(playerSelection){
+    let computerSelection =computerPlay();
+    
+    if(computerSelection === playerSelection){
+        return drawScoreBoard(), console.log("It's a draw! Try again!", drawScore += 1);
     }else{
-        if(playerResult === tools[0] && aiResult != tools[1]){
-            return playerWin(), console.log(`${match}: You win, ${playerResult} beat the ${aiResult}`, userScore)
-        }else if(playerResult === tools[1] && aiResult != tools[2]) {
-            return playerWin(), console.log(`${match}: You win, ${playerResult} beat the ${aiResult}`, userScore)
-        }else if(playerResult === tools[2] && aiResult != tools[0]){
-            return playerWin(), console.log(`${match}: You win, ${playerResult} beat the ${aiResult}`,userScore)
-        }else{
-            return aiWin(), console.log(`${match}: Ai win, ${aiResult} beat the ${playerResult}`, aiScore)
-        }
+    if(playerSelection =="rock" && computerSelection == "scissor"){
+        return playerWin(), console.log("You win! Rock beat the scissor!", playerScore += 1);
+    }else if(playerSelection == "paper" && computerSelection == "rock"){
+        return playerWin(), console.log("You win! Paper beat the rock!", playerScore += 1);
+    }else if(playerSelection == "scissor" && computerSelection == "paper"){
+        return playerWin(), console.log("You win! Scissor beat the paper!", playerScore += 1)
+    }else{
+        return aiWin(), console.log("Computer win!", computerScore += 1)
     }
-};
+}
+}
+
+buttons.forEach(button => {
+    button.addEventListener("click", () => {
+        playRound(button.value);
+    })
+})
 
 function playerWin(){
-    const playerScore = document.getElementById("userScore");
-    while(userScore <= 6){
-        if(userScore == 6){
-            console.log("Congratz! You are the winner!"), button.removeEventListener("click", playerSelect);
-            break;
+    const userScore = document.getElementById("userScore");
+        if(playerScore == 6){
+            return console.log("Congratz! You are the winner!"), disableButtons();
         }else{
-            return playerScore.textContent =  userScore++, console.log(userScore);
-        }
+            return userScore.textContent =  playerScore, console.log(playerScore);    
     }     
 }
 function aiWin(){
-    const computerScore = document.getElementById("aiScore");
-    while(aiScore <= 6){
-        if(aiScore == 6){
-            return console.log("Computer win the game! Try again"), button.removeEventListener("click", playerSelect);
+    const aiScore = document.getElementById("aiScore");
+        if(computerScore == 6){
+            return console.log("Computer win the game! Try again"), disableButtons();
         }else{
-            return computerScore.textContent =  aiScore++, console.log(aiScore);
+            return aiScore.textContent =  computerScore, console.log(computerScore);
         }
     }   
-}
+
 function drawScoreBoard(){
-    const drawScore = document.getElementById("draw")
-    drawScore.textContent =  draw++;
+    const draw = document.getElementById("draw")
+    draw.textContent =  drawScore;
 }
 
-// function checkWinner() {
-//     if(aiScore === 5 || userScore === 5){
-//         if(aiScore === userScore){
-//             updateWinner = "draw"
-//         }else{
-//             let win = `${(aiScore > userScore) ? "computer" : "player"}`;
-//         }
-//     }
-// }
- 
-// function updateWinner(){
+function disableButtons(){
+    buttons.forEach(element => {
+            element.disabled = true;
+        })
+    }
 
-// }
+function resetGame() {
+    
+    location.reload();
+}
+
+function test(){
+    console.log(playRound())
+}

@@ -12,15 +12,18 @@
         <h1>Rock, Paper and Scissors!</h1>
     </div>
     <div>
-        <button onclick="aiWin()">test</button>
-        <div id="userScore">0</div> <br>
+        <button onclick="test()">test</button>
+        <div id="userScore">0</div>  <br>
         <div id="draw">0</div> <br>
         <div id="aiScore">0</div> <br>
     </div>
     <div id="buttons">
-        <button class="btn" id="btn-rock" type="submit" value="rock" onclick="playRound()">Rock!!</button>
-        <button class="btn" id="btn-paper" type="submit" value="paper" onclick="playRound()">Paper!!</button>
-        <button class="btn" id="btn-scissor" type="submit" value="scissor" onclick="playRound()">Scissor!!</button>
+        <input type="button" value="rock"></input>
+        <input type="button" value="paper"></input>
+        <input type="button" value="scissor"></input>
+    <div>
+        <button type="hidden" id="resetButton" onclick="resetGame()">Play again!</button>
+    </div>
     </div>
 </body>
 </html>
