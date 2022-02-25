@@ -20,38 +20,34 @@ function playRound(playerSelection){
     const userScore = document.getElementById("userScore");
 
         if(computerSelection === playerSelection){
-            const draw = document.getElementById("draw")
+            const draw = document.getElementById("draw");
                 draw.textContent =  drawScore +=1;
                     console.log("It's a draw! Try again!");
-        }else{
-            
-        if(playerSelection =="Rock" && computerSelection == "Scissor" ||
-            playerSelection == "Paper" && computerSelection == "Rock" ||
-            playerSelection == "Scissor" && computerSelection == "Paper"){
-            if(playerScore === 5){
-                disableButtons(), console.log("You win!", playerScore);
+        }else{  
+            if(playerSelection =="Rock" && computerSelection == "Scissor" ||
+                playerSelection == "Paper" && computerSelection == "Rock" ||
+                playerSelection == "Scissor" && computerSelection == "Paper"){
+                    userScore.textContent =  playerScore += 1; console.log("you win:", playerScore);   
+                    result.textContent = "Player win the round!";            
             }else{
-                userScore.textContent =  playerScore += 1, console.log("you win:", playerScore);   
-                result.textContent = "Player win the round!"; 
-            }            
-        }else{
-            if(computerScore === 5){
-                disableButtons(), console.log("Computer win the game! Try again");
-            }else{
-                aiScore.textContent =  computerScore += 1 , console.log("computer win", computerScore);
-                result.textContent = "Computer win the round!";
+                    aiScore.textContent =  computerScore += 1; console.log("computer win", computerScore);
+                    result.textContent = "Computer win the round!";
+                }
+            checkWinner();
             }
-            
         }
-    }
-}
+
 
 buttons.forEach(button => {
     button.addEventListener("click", () => {
         playRound(button.value);
     })
 })
-
+function checkWinner(){
+    if(playerScore == 5 || computerScore == 5){
+        disableButtons();
+    }
+}
 function disableButtons(){
     buttons.forEach(element => {
             element.disabled = true;
