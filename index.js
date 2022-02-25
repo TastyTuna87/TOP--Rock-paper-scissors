@@ -33,7 +33,9 @@ function playRound(playerSelection){
                     aiScore.textContent =  computerScore += 1; console.log("computer win", computerScore);
                     result.textContent = "Computer win the round!";
                 }
-            checkWinner();
+                if(playerScore == 5 || computerScore == 5){
+                    disableButtons();
+                }
             }
         }
 
@@ -43,11 +45,7 @@ buttons.forEach(button => {
         playRound(button.value);
     })
 })
-function checkWinner(){
-    if(playerScore == 5 || computerScore == 5){
-        disableButtons();
-    }
-}
+
 function disableButtons(){
     buttons.forEach(element => {
             element.disabled = true;
