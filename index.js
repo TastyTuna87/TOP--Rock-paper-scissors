@@ -1,12 +1,13 @@
 const buttons = document.querySelectorAll("input");
+let result = document.getElementById("result");
 
-let playerScore = 0;
-let computerScore = 0;
-let drawScore = 0;
+let playerScore = 0
+let computerScore = 0
+let drawScore = 0
 
 // computer random select
 function computerPlay(){
-    const tools = ["rock", "paper", "scissor"];
+    const tools = ["Rock", "Paper", "Scissor"];
         return tools[Math.floor(Math.random()*tools.length)];
     
 }
@@ -15,24 +16,31 @@ function computerPlay(){
 
 function playRound(playerSelection){
     let computerSelection =computerPlay();
-    
+    const aiScore = document.getElementById("aiScore");
+    const userScore = document.getElementById("userScore");
+
         if(computerSelection === playerSelection){
             const draw = document.getElementById("draw")
-                draw.textContent =  drawScore += 1;
+                draw.textContent =  drawScore +=1;
                     console.log("It's a draw! Try again!");
-            
         }else{
-        if(playerSelection =="Rock" && computerSelection == "scissor"){
-            playerWin(), console.log("You win! Rock beat the scissor!");
             
-        }else if(playerSelection == "Paper" && computerSelection == "rock"){
-            playerWin(), console.log("You win! Paper beat the rock!");
-            
-        }else if(playerSelection == "Scissor" && computerSelection == "paper"){
-            playerWin(), console.log("You win! Scissor beat the paper!");
-            
+        if(playerSelection =="Rock" && computerSelection == "Scissor" ||
+            playerSelection == "Paper" && computerSelection == "Rock" ||
+            playerSelection == "Scissor" && computerSelection == "Paper"){
+            if(playerScore === 5){
+                disableButtons(), console.log("You win!", playerScore);
+            }else{
+                userScore.textContent =  playerScore += 1, console.log("you win:", playerScore);   
+                result.textContent = "Player win the round!"; 
+            }            
         }else{
-            aiWin(), console.log("Computer win!");
+            if(computerScore === 5){
+                disableButtons(), console.log("Computer win the game! Try again");
+            }else{
+                aiScore.textContent =  computerScore += 1 , console.log("computer win", computerScore);
+                result.textContent = "Computer win the round!";
+            }
             
         }
     }
@@ -44,23 +52,6 @@ buttons.forEach(button => {
     })
 })
 
-function playerWin(){
-    const userScore = document.getElementById("userScore");
-        if(playerScore == 5){
-            disableButtons(), console.log("Congratz! You are the winner!");
-        }else{
-            userScore.textContent =  playerScore += 1, console.log(playerScore);    
-    }     
-}
-function aiWin(){
-    const aiScore = document.getElementById("aiScore");
-        if(computerScore == 5){
-            disableButtons(),console.log("Computer win the game! Try again");
-        }else{
-            aiScore.textContent =  computerScore += 1 , console.log(computerScore);
-        }
-    }   
-
 function disableButtons(){
     buttons.forEach(element => {
             element.disabled = true;
@@ -70,4 +61,3 @@ function disableButtons(){
 function resetGame(){
     location.reload();
 }
-
