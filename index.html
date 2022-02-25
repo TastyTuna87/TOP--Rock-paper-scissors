@@ -5,25 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./index.js" defer></script>
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Redressed&display=swap');
+        </style>
     <title>Rock, Paper, Scissor! TOP</title>
 </head>
-<body>
-    <div>
-        <h1>Rock, Paper and Scissors!</h1>
-    </div>
-    <div>
-        <button onclick="test()">test</button>
-        <div id="userScore">0</div>  <br>
-        <div id="draw">0</div> <br>
-        <div id="aiScore">0</div> <br>
-    </div>
-    <div id="buttons">
-        <input type="button" value="rock"></input>
-        <input type="button" value="paper"></input>
-        <input type="button" value="scissor"></input>
-    <div>
-        <button type="hidden" id="resetButton" onclick="resetGame()">Play again!</button>
-    </div>
+<body class="body">
+    <div class="mainBox">
+        <div class="header">
+            <h1>Rock, Paper and Scissors!</h1>
+        </div>
+            <div class="bodyBox">
+                <div class="buttonGroup" id="buttons">
+                    <input class="button" type="button" value="Rock"></input>
+                    <input class="button" type="button" value="Paper"></input>
+                    <input class="button" type="button" value="Scissor"></input>
+            </div>
+            <div class="scoreBoard">
+                <div class="scoreBoardName">
+                    <p class="user">Player: </p>
+                    <p class="score" id="userScore">0</p>
+                </div>
+                <div class="scoreBoardName">
+                    <p class="user">Tie: </p>
+                    <p class="score" id="draw">0</p>
+                </div>
+                <div class="scoreBoardName">
+                    <p class="user">Computer: </p>
+                    <p class="score" id="aiScore">0</p>
+                </div>
+            </div>
+            <div class="resetButton">
+                <button class="button" id="resetButton" onclick="resetGame()">Play again!</button>
+            </div>
+        </div>
     </div>
 </body>
 </html>

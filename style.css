@@ -1,3 +1,71 @@
-.button{
+.body{
+    height: 100%;
+    background-color: #fefbd8;
+    background-size: cover;
+}
+
+.header{
+    text-align: center;
+    padding-top: 3%;
+    font-family: 'Redressed', cursive;
+    font-size: 250%;
+}
+.bodyBox{
+    display: flex;
+    flex-direction: column;
     
+}
+
+.buttonGroup{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2%;
+    
+}
+.resetButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.scoreBoard{
+    display: flex;
+    justify-content: center;
+}
+.scoreBoardName{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+
+}
+.user{
+    font-family: 'Redressed', cursive;
+    font-size: 200%;
+}
+.score{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    margin: 10px;
+    border: 2px solid;
+    border-radius: 10px;
+    font-family: 'Redressed', cursive;
+    font-size: 250%;
+
+}
+.button{
+    background-color: #13CC1A ;
+    height: 70px;
+    width: 100px;
+    padding: 25px;
+    margin: 20px;
+    border: none;
+    border-radius: 10%;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: 'Redressed', cursive;
+    font-size: 120%;
 }

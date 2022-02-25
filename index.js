@@ -1,33 +1,41 @@
 const buttons = document.querySelectorAll("input");
 
-let playerScore = 1;
-let computerScore = 1;
-let drawScore = 1;
-
+let playerScore = 0;
+let computerScore = 0;
+let drawScore = 0;
 
 // computer random select
 function computerPlay(){
     const tools = ["rock", "paper", "scissor"];
-    return tools[Math.floor(Math.random()*tools.length)];
+        return tools[Math.floor(Math.random()*tools.length)];
     
 }
 // play
+// try to build-in playerWin(), aiWin() and drawScoreBoard
+
 function playRound(playerSelection){
     let computerSelection =computerPlay();
     
-    if(computerSelection === playerSelection){
-        return drawScoreBoard(), console.log("It's a draw! Try again!", drawScore += 1);
-    }else{
-    if(playerSelection =="rock" && computerSelection == "scissor"){
-        return playerWin(), console.log("You win! Rock beat the scissor!", playerScore += 1);
-    }else if(playerSelection == "paper" && computerSelection == "rock"){
-        return playerWin(), console.log("You win! Paper beat the rock!", playerScore += 1);
-    }else if(playerSelection == "scissor" && computerSelection == "paper"){
-        return playerWin(), console.log("You win! Scissor beat the paper!", playerScore += 1)
-    }else{
-        return aiWin(), console.log("Computer win!", computerScore += 1)
+        if(computerSelection === playerSelection){
+            const draw = document.getElementById("draw")
+                draw.textContent =  drawScore += 1;
+                    console.log("It's a draw! Try again!");
+            
+        }else{
+        if(playerSelection =="Rock" && computerSelection == "scissor"){
+            playerWin(), console.log("You win! Rock beat the scissor!");
+            
+        }else if(playerSelection == "Paper" && computerSelection == "rock"){
+            playerWin(), console.log("You win! Paper beat the rock!");
+            
+        }else if(playerSelection == "Scissor" && computerSelection == "paper"){
+            playerWin(), console.log("You win! Scissor beat the paper!");
+            
+        }else{
+            aiWin(), console.log("Computer win!");
+            
+        }
     }
-}
 }
 
 buttons.forEach(button => {
@@ -38,37 +46,28 @@ buttons.forEach(button => {
 
 function playerWin(){
     const userScore = document.getElementById("userScore");
-        if(playerScore == 6){
-            return console.log("Congratz! You are the winner!"), disableButtons();
+        if(playerScore == 5){
+            disableButtons(), console.log("Congratz! You are the winner!");
         }else{
-            return userScore.textContent =  playerScore, console.log(playerScore);    
+            userScore.textContent =  playerScore += 1, console.log(playerScore);    
     }     
 }
 function aiWin(){
     const aiScore = document.getElementById("aiScore");
-        if(computerScore == 6){
-            return console.log("Computer win the game! Try again"), disableButtons();
+        if(computerScore == 5){
+            disableButtons(),console.log("Computer win the game! Try again");
         }else{
-            return aiScore.textContent =  computerScore, console.log(computerScore);
+            aiScore.textContent =  computerScore += 1 , console.log(computerScore);
         }
     }   
-
-function drawScoreBoard(){
-    const draw = document.getElementById("draw")
-    draw.textContent =  drawScore;
-}
 
 function disableButtons(){
     buttons.forEach(element => {
             element.disabled = true;
         })
     }
-
-function resetGame() {
-    
+//relaod page hide the button before we knwo who win
+function resetGame(){
     location.reload();
 }
 
-function test(){
-    console.log(playRound())
-}
